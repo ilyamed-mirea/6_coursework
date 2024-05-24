@@ -22,7 +22,7 @@ from drf_yasg.views import get_schema_view
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="HTML Parser API",
+        title="Extractor API",
         default_version="v1",
         description="API для парсинга HTML",
     ),
