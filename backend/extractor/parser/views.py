@@ -43,7 +43,7 @@ def replace_text(request):
             r"<([^>]+)>(.*?)</\1>", replace_text_inside_tags, html, flags=re.DOTALL
         )
 
-        return Response(updated_html)
+        return Response({"updated_html": updated_html})
     return Response(serializer.errors, status=400)
 
 

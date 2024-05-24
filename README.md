@@ -1,2 +1,8 @@
 # 6_coursework
-back+front+nginx
+back(Django) + front(Astro) + Proxy(nginx)
+
+```sh
+docker compose up --build
+```
+
+open `localhost`

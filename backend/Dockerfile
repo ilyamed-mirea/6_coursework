@@ -1,3 +1,13 @@
-# pip install django djangorestframework django-swagger-ui
-# python manage.py startapp parser
-# python manage.py runserver
+FROM python:3.10
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY ./extractor .
+
+RUN python manage.py migrate
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

@@ -81,3 +81,49 @@ class ReplaceTextTestCase(TestCase):
         self.assertEqual(
             response.content.decode("utf-8").strip()[1:-1], expected_html.strip()
         )
+
+
+class ValidateHTMLTestCase(TestCase):
+    def test_validate_valid_html(self):
+        url = reverse("validate_html")
+        valid_html = """
+            <html>
+                <head>
+                    <title>Test Page</title>
+                </head>
+                <body>
+                    <h1>Welcome</h1>
+                    <p>This is a valid HTML page.</p>
+                </body>
+            </html>
+        """
+        data = {"html": valid_html}
+        response = self.client.post(url, data=data, content_type="application/json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data, {"is_valid": True})
+
+    def test_validate_invalid_html(self):
+        url = reverse("validate_html")
+        invalid_html = """
+            <html>
+                <head>
+                    <title>Test Page</title>
+                </head>
+                <body>
+                    <h1>Welcome</h1>
+                    <p>This is an invalid HTML page.
+                </body>
+            </html>
+        """
+        data = {"html": invalid_html}
+        response = self.client.post(url, data=data, content_type="application/json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data, {"is_valid": False})
+
+    def test_validate_empty_html(self):
+        url = reverse("validate_html")
+        empty_html = ""
+        data = {"html": empty_html}
+        response = self.client.post(url, data=data, content_type="application/json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data, {"is_valid": False})
