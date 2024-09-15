@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 name: extractor
 services:
   backend:
@@ -14,8 +14,6 @@ services:
     environment:
       HOST: "0.0.0.0"
       PORT: "4321"
-    depends_on:
-      - nginx
     restart: always
 
   nginx:
@@ -26,4 +24,5 @@ services:
       - "80:80"
     depends_on:
       - backend
+      - frontend
     restart: always

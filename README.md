@@ -5,4 +5,8 @@ back(Django) + front(Astro) + Proxy(nginx)
 docker compose up --build
 ```
 
+```sh
+podman-compose up
+```
+
 open `localhost`
